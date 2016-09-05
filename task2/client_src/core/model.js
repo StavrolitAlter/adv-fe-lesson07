@@ -18,9 +18,9 @@
 				cb();
 			});
 		},
-		set: function(key, value, shouldNotify) {
+		set: function(key, value, silent) {
 			this.attributes[key] = value;
-			if (shouldNotify) {
+			if (!silent) {
 				this.notify();
 			}
 		},

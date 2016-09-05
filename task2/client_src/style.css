@@ -29,7 +29,7 @@ a {
 }
 
 .layout{
-    background: url('/ra.jpg') no-repeat fixed center;
+    background: url('/images/ra.jpg') no-repeat fixed center;
     position: absolute;
     top: 0;
     bottom: 0;

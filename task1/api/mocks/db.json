@@ -257,11 +257,11 @@
       "id": 466,
       "comments": [
         {
-          "user": "okonkwo",
+          "user": 1,
           "text": "my comment"
         },
         {
-          "user": "testuser1",
+          "user": 0,
           "text": "my comment 2"
         }
       ]

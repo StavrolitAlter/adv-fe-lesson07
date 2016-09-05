@@ -17,15 +17,14 @@ module.exports = function Game() {
 			return response.json();
 		})
 		.then(function(result) {
-			initialResourcesDataArray = result.resources;
-			gameBlockCreation();
+			gameBlockCreation(result.resources);
 		})
 		.catch(function(arror) {
 			console.log('An error occured while accessing local DB with resource data');
 		});
 
 
-	function gameBlockCreation() {
+	function gameBlockCreation(initialResourcesDataArray) {
 
 		var initialGodAttitude = 50;
 		var tunnersArray = [];

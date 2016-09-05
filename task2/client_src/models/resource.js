@@ -1,46 +1,32 @@
 module.exports = Model.createModel({
 	init: function(options) {
 		$.extend(this.attributes, options);
-		this.set('giftCount', 0);
+		this.set('giftCount', 0, true);
 	},
-	inc: function(prop) {
-
-		var currentStashCount;
-
-		if (prop === 'stashCount') {
-			this.set(prop, this.get(prop) + 1, true);
+	inc: function() {
+		var currentStashCount = this.get('stashCount');
+		if (currentStashCount) {
+			this.set('stashCount', currentStashCount - 1, true);
+			this.set('giftCount', this.get('giftCount') + 1);
 		} else {
-			currentStashCount = this.get('stashCount');
-			if (currentStashCount) {
-				this.set('stashCount', currentStashCount - 1);
-				this.set(prop, this.get(prop) + 1, true);
-			} else {
-				this.inform('stashCount');
-			}
+			this.showError('stashCount');
 		}
-
 	},
-	dec: function(prop) {
-
+	dec: function() {
 		var currentGiftCount;
-		if (prop === 'stashCount') {
-			this.set(prop, this.get(prop) - 1, true);
+		currentGiftCount = this.get('giftCount');
+		if (currentGiftCount) {
+			this.set('stashCount', this.get('stashCount') + 1, true);
+			this.set('giftCount', currentGiftCount - 1);
 		} else {
-			currentGiftCount = this.get(prop);
-			if (currentGiftCount) {
-				this.set('stashCount', this.get('stashCount') + 1);
-				this.set(prop, this.get(prop) - 1, true);
-			} else {
-				this.inform(prop);
-			}
+			this.showError('giftCount');
 		}
-		
 	},
-	inform: function(prop) {
+	showError: function(prop) {
 		if (prop === 'stashCount') {
-			console.log('This resource stash is empty. You can\'t endow more of this resource');
+			console.warn('This resource stash is empty. You can\'t endow more of this resource');
 		} else {
-			console.log('You can\'t endow less than nothing');
+			console.warn('You can\'t endow less than nothing');
 		}
 	}
 });

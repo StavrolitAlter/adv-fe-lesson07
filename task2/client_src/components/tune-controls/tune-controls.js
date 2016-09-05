@@ -12,10 +12,10 @@ module.exports = function TuneControls(options) {
 
 	function subscribeHandlers() {
 		elem.find('.tune-controls__inc').click(function() {
-			resourceModel.inc('giftCount');
+			resourceModel.inc();
 		});
 		elem.find('.tune-controls__dec').click(function() {
-			resourceModel.dec('giftCount');
+			resourceModel.dec();
 		});
 	}
 

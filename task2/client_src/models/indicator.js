@@ -13,6 +13,6 @@ module.exports = Model.createModel({
 		return this.get('count') || 0;
 	},
 	setCount: function(count) {
-		this.set('count', count, true);
+		this.set('count', count);
 	}
 });

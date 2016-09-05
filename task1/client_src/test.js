@@ -11,9 +11,9 @@ fetch('/json-server/posts/466/', {
 	console.log('Success: 466 likes were updated');
 }).then(function() {
 	console.log('Attempt to calculate all likes amount');
-	return fetch('/json-server/posts');
-}).then(function(response) {
-	return response.json();
+	return fetch('/json-server/posts').then(function(response) {
+		return response.json();
+	});
 }).then(function(postsArray) {
 	var likesAmount = 0;
 	postsArray.forEach(function(post) {
@@ -22,9 +22,9 @@ fetch('/json-server/posts/466/', {
 	console.log('Success: all likes amount - ' + likesAmount);
 }).then(function() {
 	console.log('Attempt to get comments to 466 post');
-	return fetch('/json-server/posts/466/');
-}).then(function(response) {
-	return response.json();
+	return fetch('/json-server/posts/466/').then(function(response) {
+		return response.json();
+	});
 }).then(function(post) {
 	return getCommentsForPost(post);
 }).then(function(result) {
@@ -56,7 +56,8 @@ function getCommentsForPost(post) {
 				return 	Promise.all(promicesArray.map(function(response) {
 					return response.json();
 				}));
-			}).then(function(objArray) {
+			})
+			.then(function(objArray) {
 
 				var userCommentsArray = [];
 				var usersObj = {};
@@ -72,34 +73,18 @@ function getCommentsForPost(post) {
 				// In case users with listed IDs exist
 				if (Object.keys(usersObj).length) {
 
-					// Updating comments array with user names instead IDs
-					comments = comments.map(function(commentData) {
+					// Filling array with comments data
+					comments.forEach(function(commentData) {
 						var userId = commentData.user;
 						var userData = usersObj[userId];
 						if (userData) {
-							commentData.user = userData.name;
 							userCommentsArray.push(
-								commentData.user + ': ' + commentData.text
+								userData.name + ': ' + commentData.text
 							);
 						}
-						return commentData;
 					});
 
-					// Updating DB by new comments array
-					console.log('Attempt to get update comments to 466 post');
-					fetch('/json-server/posts/466/', {
-						method: 'PATCH',
-						headers: {
-							'Content-Type' : 'application/json'
-						},
-						body: JSON.stringify({
-							comments: comments
-						})
-					}).then(function() {
-						console.log('Success: comments to 466 post were updated');
-					});
-
-					// Resolving returning promise by required array
+					// Resolving returning promise with required array
 					resolve(userCommentsArray);
 
 				} else {
