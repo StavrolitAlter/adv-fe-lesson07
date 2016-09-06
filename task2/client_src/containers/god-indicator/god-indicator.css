@@ -1,0 +1,12 @@
+.god-indicator__Attitude {
+    margin: 30px 10px;
+}
+    &__label {
+        font-weight: 900;
+    }
+.god-indicator__Attitude .bar {
+	color: red;
+}
+.god-indicator__Attitude .bar.negative {
+	color: green;
+}

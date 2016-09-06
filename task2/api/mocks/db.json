@@ -1,0 +1,9 @@
+{
+    "wealth": {
+        "resources": [
+            {"name": "Copper", "stashCount": 70, "attitudeEffect": 1},
+            {"name": "Gold", "stashCount": 30, "attitudeEffect": 4},
+            {"name": "Diamond", "stashCount": 10, "attitudeEffect": 10}
+        ]
+    }
+}
